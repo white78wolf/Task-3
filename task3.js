@@ -41,20 +41,20 @@ function startGame() {    // функция на кнопке "старт"
 
         squares[i].style.background = '#fff';                         // задаём "рабочий" цвет для клетки и прикручиваем функцию клика
         squares[i].onclick = function () {
-            changeColor(i);
+            showColor(i);
         };
     }
 }
 // функция для обработки клика по клетке с данным индексом
-function changeColor(index) {
+function showColor(index) {
     if (previousColor == '') {                                 // если перед этим не был открыт какой-либо одиночный цвет
         squares[index].style.background = hiddenColors[index]; // "красим" клетку
         previousColor = hiddenColors[index];                   // сохраняем параметры нажатой клетки
         previousIndex = index;
 
-    } else if (previousColor == hiddenColors[index]) {         // если цвета совпали
-        squares[index].style.background = hiddenColors[index]; // "красим" данную клетку тоже
-        countOfPairs++;                                        // счётчик прогресса инкрементируется
+    } else if (previousColor == hiddenColors[index] && index != previousIndex) { // если цвета совпали, и это не одно и то же поле
+        squares[index].style.background = hiddenColors[index];                   // "красим" данную клетку тоже
+        countOfPairs++;                                                          // счётчик прогресса инкрементируется
         // далее меняем у обеих совпавших клеток функцию обработки клика - "выводим из игры"
         squares[index].onclick = function () {
             return false; 
